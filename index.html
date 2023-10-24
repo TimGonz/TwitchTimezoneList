@@ -7,8 +7,8 @@
     font-size: 72px;
     font-weight: bold;
     font-family: monospace;
-    -webkit-text-stroke-width: 3px;
-    -webkit-text-stroke-color: black;
+    /*-webkit-text-stroke-width: 3px;*/
+    /*-webkit-text-stroke-color: black;*/
     background: green;
   }
 
@@ -27,9 +27,23 @@
     animation: marquee 32s linear infinite;
   }
 
-  /*.content {*/
-  /*  display: inline-block;*/
-  /*}*/
+  .content {
+    paint-order: stroke fill;
+    position: relative
+  }
+  .content:after {
+    content: attr(data-text);
+
+    position: absolute;
+    left: 0;
+    z-index: -1;
+
+    /* visible stroke is 10px because of alignment */
+    -webkit-text-stroke: 9px black;
+
+    /* is sized relative to h1 */
+    font-size: 1em;
+  }
 
   @keyframes marquee {
     from { transform: translateX(0); }
@@ -49,10 +63,10 @@
 <body translate="no" >
 <div class="">
   <div class="">
-    <div id="content1" class="content"></div>
-    <div id="content2" class="content"></div>
-    <div id="content3" class="content"></div>
-    <div id="content4" class="content"></div>
+    <div id="content1" class="content" data-text=""></div>
+    <div id="content2" class="content" data-text=""></div>
+    <div id="content3" class="content" data-text=""></div>
+    <div id="content4" class="content" data-text=""></div>
   </div>
 </div>
 
@@ -83,9 +97,17 @@
       //output.innerText = moment().format(urlParams["format"] || 'DD/MM/YYYY HH:mm:ss');
       // ^ old string, above, new preferred below:
       output1.innerText = moment().tz("Europe/London").format('HH:mm:ss [BST]');
+      output1.setAttribute("data-text", moment().tz("Europe/London").format('HH:mm:ss [BST]'));
+
       output2.innerText = moment().tz("America/Los_Angeles").format('HH:mm:ss [PST]');
+      output2.setAttribute("data-text", moment().tz("America/Los_Angeles").format('HH:mm:ss [PST]'));
+
       output3.innerText = moment().tz("America/Chicago").format('HH:mm:ss [CST]');
+      output3.setAttribute("data-text",moment().tz("America/Chicago").format('HH:mm:ss [CST]'));
+
       output4.innerText = moment().tz("America/New_York").format('HH:mm:ss [EST]');
+      output4.setAttribute("data-text", moment().tz("America/New_York").format('HH:mm:ss [EST]'));
+
     }, 1000);
   c();
 </script>
