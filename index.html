@@ -97,7 +97,7 @@
       //output.innerText = moment().format(urlParams["format"] || 'DD/MM/YYYY HH:mm:ss');
       // ^ old string, above, new preferred below:
       output1.innerText = moment().tz("Europe/London").format('HH:mm:ss [BST]');
-      output1.setAttribute("data-text", moment().tz("Europe/London").format('HH:mm:ss [BST]'));
+      output1.setAttribute("data-text", moment().tz("Europe/London").format('HH:mm:ss [GMT]'));
 
       output2.innerText = moment().tz("America/Los_Angeles").format('HH:mm:ss [PST]');
       output2.setAttribute("data-text", moment().tz("America/Los_Angeles").format('HH:mm:ss [PST]'));
